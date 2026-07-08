@@ -11,11 +11,13 @@ public class CustomerService {
         // Test Cases
 
         // Test 1
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: Size for the queue is invalid (less than or equal to 0)
+        // Expected Result: The size should default to 10
         Console.WriteLine("Test 1");
+        var line = new CustomerService(-1);
+        Console.WriteLine(line);
 
-        // Defect(s) Found: 
+        // Defect(s) Found: no defects
 
         Console.WriteLine("=================");
 
