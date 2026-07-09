@@ -24,14 +24,22 @@
 
         // Find the index of the item with the highest priority to remove
         var highPriorityIndex = 0;
-        for (int index = 1; index < _queue.Count - 1; index++)
+        //Defect DifferentPriorities test: Not saving the index of the highest priority in queue
+        for (int index = 1; index < _queue.Count; index++)
         {
-            if (_queue[index].Priority >= _queue[highPriorityIndex].Priority)
+            //Defect SamePriority test: Not checking for same priorities in queue and not doing FIFO
+            // Change >= to > in if statement condition
+            if (_queue[index].Priority > _queue[highPriorityIndex].Priority)
+            {
                 highPriorityIndex = index;
+            }
+            
         }
 
         // Remove and return the item with the highest priority
         var value = _queue[highPriorityIndex].Value;
+        //Defect DifferentPriorities test: Not removing the highest priority in queque
+        _queue.RemoveAt(highPriorityIndex);
         return value;
     }
 
