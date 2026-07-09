@@ -13,7 +13,10 @@ public class PersonQueue
     /// <param name="person">The person to add</param>
     public void Enqueue(Person person)
     {
-        _queue.Insert(0, person);
+        //Defect Finite Repitition test & AddPlayerMidway test:
+        // Using Insert (0,person) which is adding the person in front of the list. 
+        // Changed to Add(person) to add at the end of the list
+        _queue.Add(person);
     }
 
     public Person Dequeue()

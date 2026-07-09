@@ -45,6 +45,12 @@ public class TakingTurnsQueue
                 person.Turns -= 1;
                 _people.Enqueue(person);
             }
+            //Defect ForeverZero Test: not checking for zero value
+            //Defect ForeverNegative test: not checking for negative value
+            else if (person.Turns <= 0)
+            {
+                _people.Enqueue(person);
+            }
 
             return person;
         }
