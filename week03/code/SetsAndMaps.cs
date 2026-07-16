@@ -63,6 +63,16 @@ public static class SetsAndMaps
         {
             var fields = line.Split(",");
             // TODO Problem 2 - ADD YOUR CODE HERE
+            var degreeId = fields[3];
+
+            if (degrees.ContainsKey(degreeId))
+            {
+                degrees[degreeId] += 1;
+            } else
+            {
+                degrees[degreeId] = 1;
+            }
+
         }
 
         return degrees;
