@@ -97,7 +97,46 @@ public static class SetsAndMaps
     public static bool IsAnagram(string word1, string word2)
     {
         // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        //make a dictionary containing the letter and the number of times it is shown in the word
+        var letterCount = new Dictionary<char, int>();
+
+        //Store each letter in the first word with it's count
+        foreach (char letter in word1.ToLower())
+        {
+            if (letter != ' ')
+            {
+                if (letterCount.ContainsKey(letter))
+                    //Increment count
+                    letterCount[letter] = letterCount[letter] + 1;
+                else
+                    letterCount[letter] = 1;
+            }
+        }
+
+        //Make checks for the second word
+        foreach (char letter in word2.ToLower())
+        {
+            //Check for spaces
+            if (letter != ' ')
+            {
+                if (letterCount.ContainsKey(letter))
+                    //Decrement count
+                    letterCount[letter] = letterCount[letter] - 1;
+                else
+                    return false;
+            }
+        }
+
+        //Check each the values of each key value pair in the dictionary
+        foreach (var keyValuePair in letterCount)
+        {
+            if (keyValuePair.Value != 0)
+                //means there are mismatched letter amounts
+                // tells us that words are not anagrams
+                return false;
+        }
+
+        return true;
     }
 
     /// <summary>
