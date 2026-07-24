@@ -140,6 +140,30 @@ public class LinkedList : IEnumerable<int>
     public void Remove(int value)
     {
         // TODO Problem 3
+        Node? curr = _head;
+        while(curr != null)
+        {
+            if (curr.Data == value)
+            {
+                if (curr == _tail)
+                {
+                    RemoveTail();
+                }
+                else if (curr == _head)
+                {
+                    RemoveHead();
+                }
+                else
+                {
+                    curr.Next!.Prev = curr.Prev;
+                    curr.Prev!.Next = curr.Next;
+                }
+
+                return; // exit function after removing element
+            }
+
+            curr = curr.Next;
+        }
     }
 
     /// <summary>
