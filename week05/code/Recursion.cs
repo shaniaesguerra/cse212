@@ -15,7 +15,16 @@ public static class Recursion
     public static int SumSquaresRecursive(int n)
     {
         // TODO Start Problem 1
-        return 0;
+        if( n <= 0)
+        {
+            //no recurssion, terminating case
+            return 0;
+        }
+        else
+        {
+            //n^2 + (n-1)!
+            return (int)Math.Pow(n,2)+ SumSquaresRecursive(n-1) ;
+        }
     }
 
     /// <summary>
