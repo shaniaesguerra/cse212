@@ -17,7 +17,7 @@ public static class Recursion
     public static int SumSquaresRecursive(int n)
     {
         // TODO Start Problem 1
-        if( n <= 0)
+        if (n <= 0)
         {
             //no recurssion, terminating case
             return 0;
@@ -25,7 +25,7 @@ public static class Recursion
         else
         {
             //n^2 + (n-1)!
-            return (int)Math.Pow(n,2)+ SumSquaresRecursive(n-1) ;
+            return (int)Math.Pow(n, 2) + SumSquaresRecursive(n - 1);
         }
     }
 
@@ -57,7 +57,7 @@ public static class Recursion
             {
                 //Terminating case:
                 results.Add(word); // add word to list once word is the correct size
-                return;            
+                return;
             }
             else
             {
@@ -168,6 +168,24 @@ public static class Recursion
     public static void WildcardBinary(string pattern, List<string> results)
     {
         // TODO Start Problem 4
+        int indexOfSymbol = pattern.IndexOf('*');
+
+        //base case: when there is no "*" found in pattern
+        if (indexOfSymbol == -1)
+        {
+            //complete binary string and add to results;
+            results.Add(pattern);
+            return;
+        }
+
+        //recursive case: replace '*' with '0' or '1'
+        //Replace with 0:      //before '*'    +     //at the '*'    +   //after the '*"
+        string patternZero = pattern[..indexOfSymbol] + "0" + pattern[(indexOfSymbol + 1)..];
+        WildcardBinary(patternZero, results);
+
+        //Replace with 1:      //before '*'    +     //at the '*'    +   //after the '*"
+        string patternOne = pattern[..indexOfSymbol] + "1" + pattern[(indexOfSymbol + 1)..];
+        WildcardBinary(patternOne, results);
     }
 
     /// <summary>
@@ -178,10 +196,11 @@ public static class Recursion
     {
         // If this is the first time running the function, then we need
         // to initialize the currPath list.
-        if (currPath == null) {
+        if (currPath == null)
+        {
             currPath = new List<ValueTuple<int, int>>();
         }
-        
+
         // currPath.Add((1,2)); // Use this syntax to add to the current path
 
         // TODO Start Problem 5
