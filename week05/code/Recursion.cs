@@ -1,5 +1,6 @@
 using System.Collections;
 using System.IO.Pipelines;
+using System.Runtime.CompilerServices;
 using Microsoft.VisualStudio.TestPlatform.CoreUtilities.Extensions;
 
 public static class Recursion
@@ -205,8 +206,39 @@ public static class Recursion
         // currPath.Add((1,2)); // Use this syntax to add to the current path
 
         // TODO Start Problem 5
-        // ADD CODE HERE
+        //base cases: check if we have found the end
+        if (x < 0 || x > maze.Width)
+            return;
+        if (y < 0 || y > maze.Height)
+            return;
+        if (maze.IsEnd(x, y))
+        {
+            currPath.Add((x, y));
+            results.Add(currPath.AsString());
+            currPath.RemoveAt(currPath.Count - 1);
+            return;
+        }
 
-        // results.Add(currPath.AsString()); // Use this to add your path to the results array keeping track of complete maze solutions when you find the solution.
+        if (!maze.IsValidMove(currPath, x, y))
+            return;
+        else
+        {
+            //Choose path:
+            currPath.Add((x, y));
+
+            //Explore the maze:
+            SolveMaze(results, maze, x - 1, y, currPath); //left
+            SolveMaze(results, maze, x + 1, y, currPath); //right
+            SolveMaze(results, maze, x, y + 1, currPath); //down   
+            SolveMaze(results, maze, x, y + 1, currPath); //down     
+
+            results.Add(currPath.AsString()); // Use this to add your path to the results array keeping track of complete maze solutions when you find the solution.
+                                              //Backtracking. We need to delete what we checked
+            if (currPath.Count != 0)
+            {
+                currPath.RemoveAt(currPath.Count - 1);
+            }
+        }
     }
 }
+    
