@@ -179,11 +179,12 @@ public static class Recursion
         }
 
         //recursive case: replace '*' with '0' or '1'
-        //Replace with 0:      //before '*'    +     //at the '*'    +   //after the '*"
+        //Replace with 0: 
+        //   pattern: everything before '*'  +  replacement at the '*' +  everything after the '*"
         string patternZero = pattern[..indexOfSymbol] + "0" + pattern[(indexOfSymbol + 1)..];
         WildcardBinary(patternZero, results);
 
-        //Replace with 1:      //before '*'    +     //at the '*'    +   //after the '*"
+        //Replace with 1: same pattern as replacing with zero
         string patternOne = pattern[..indexOfSymbol] + "1" + pattern[(indexOfSymbol + 1)..];
         WildcardBinary(patternOne, results);
     }
