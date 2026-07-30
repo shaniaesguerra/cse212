@@ -1,4 +1,5 @@
 using System.Collections;
+using System.IO.Pipelines;
 using Microsoft.VisualStudio.TestPlatform.CoreUtilities.Extensions;
 
 public static class Recursion
@@ -118,6 +119,13 @@ public static class Recursion
     /// </summary>
     public static decimal CountWaysToClimb(int s, Dictionary<int, decimal>? remember = null)
     {
+        //Check if it's the first time calling the function,
+        // then we need to initialize the dictionary
+        if (remember == null)
+        {
+            remember = new Dictionary<int, decimal>();
+        }
+
         // Base Cases
         if (s == 0)
             return 0;
@@ -129,9 +137,18 @@ public static class Recursion
             return 4;
 
         // TODO Start Problem 3
+        //Check if we rememeber the step before
+        if (remember.ContainsKey(s))
+        {
+            return remember[s];
+        }
 
         // Solve using recursion
-        decimal ways = CountWaysToClimb(s - 1) + CountWaysToClimb(s - 2) + CountWaysToClimb(s - 3);
+        // Passed remember variable to the recursive call
+        decimal ways = CountWaysToClimb(s - 1, remember) + CountWaysToClimb(s - 2, remember) + CountWaysToClimb(s - 3, remember);
+
+        //Remember the result by putting it in the library
+        remember[s] = ways;
         return ways;
     }
 
