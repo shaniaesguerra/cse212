@@ -1,4 +1,5 @@
 using System.Collections;
+using Microsoft.VisualStudio.TestPlatform.CoreUtilities.Extensions;
 
 public static class Recursion
 {
@@ -49,6 +50,28 @@ public static class Recursion
     public static void PermutationsChoose(List<string> results, string letters, int size, string word = "")
     {
         // TODO Start Problem 2
+        for (int i = 0; i < letters.Length; i++)
+        {
+            if (word.Length == size)
+            {
+                //Terminating case:
+                results.Add(word); // add word to list once word is the correct size
+                return;            
+            }
+            else
+            {
+                //get current character
+                char currentLetter = letters[i];
+                //add letter to word
+                string newWord = currentLetter + word;
+                //remove letter chosen in the letters in order to get different letters each time
+                string remainingLetters = letters.Remove(i, 1);
+
+                //Make recursive call passing in the new variables
+                PermutationsChoose(results, remainingLetters, size, newWord);
+            }
+        }
+
     }
 
     /// <summary>
