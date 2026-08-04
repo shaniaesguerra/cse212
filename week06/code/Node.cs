@@ -20,7 +20,7 @@ public class Node
                 Left = new Node(value);
             else
             {
-                //check if value is already in the tree
+                //Check if value is already in the tree
                 if (Left.Data != value) 
                     Left.Insert(value);
             }
@@ -32,7 +32,7 @@ public class Node
                 Right = new Node(value);
             else
             {
-                //check if value is already in the tree
+                //Check if value is already in the tree
                 if (Right.Data != value)
                     Right.Insert(value);
             }
@@ -42,6 +42,31 @@ public class Node
     public bool Contains(int value)
     {
         // TODO Start Problem 2
+        //Search for the value in the tree
+        //If the value is found, return true (BASE CASE 1)
+        if (value == Data)
+            return true;
+
+        else if (value < Data)
+        {
+            //search left
+            if (Left != null)
+            {
+                //Recursively search the left subtree
+                return Left.Contains(value);
+            }
+        }
+        else
+        {
+            //search right
+            if (Right != null)
+            {
+                //Recursively search the right subtree
+                return Right.Contains(value);
+            }
+        }
+
+        //If value is not found, return false (BASE CASE 2)
         return false;
     }
 
