@@ -19,7 +19,11 @@ public class Node
             if (Left is null)
                 Left = new Node(value);
             else
-                Left.Insert(value);
+            {
+                //check if value is already in the tree
+                if (Left.Data != value) 
+                    Left.Insert(value);
+            }
         }
         else
         {
@@ -27,7 +31,11 @@ public class Node
             if (Right is null)
                 Right = new Node(value);
             else
-                Right.Insert(value);
+            {
+                //check if value is already in the tree
+                if (Right.Data != value)
+                    Right.Insert(value);
+            }
         }
     }
 
